@@ -1,0 +1,14 @@
+<head>
+  <base href="/">
+  <script src="script/angular.min.js"></script>
+  <script src="script/main.js"></script>
+</head>
+
+
+<div ng-app="listApp" ng-controller="ListCtrl">
+	<select ng-model="selectedVideo" ng-options="x.fileName for x in videoData">
+	</select>
+<button ng-click="passData(selectedVideo.link)">
+Submit
+</button>
+</div>
