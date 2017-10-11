@@ -6,9 +6,9 @@
 
 
 <div ng-app="listApp" ng-controller="ListCtrl">
-	<select ng-model="selectedVideo" ng-options="x.fileName for x in videoData">
+	<select ng-model="selectedVideo" ng-options="x for x in videoData">
 	</select>
-<button ng-click="passData(selectedVideo.link)">
+<button ng-click="passData(selectedVideo)">
 Submit
 </button>
 </div>

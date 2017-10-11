@@ -11,7 +11,7 @@
 <body ng-app="videoApp">
 <div ng-controller="PlayCtrl as controller" class="videogular-container">
 
-	<!---Videogular contents--->
+	<!---Videogular contents-->
 	<videogular vg-theme="controller.config.theme.url">
 		<vg-media vg-src="controller.config.sources"
 				  vg-tracks="controller.config.tracks" vg-preload="controller.config.preload">
@@ -34,7 +34,7 @@
 		</vg-controls>
 	</videogular>
 	
-	<!---Custom stop button--->
+	<!---Custom stop button-->
 	<div ng-controller="StopCtrl" class="close-button outer">
 	  <div class="inner">
 		<label ng-click="stop()">Back</label>

@@ -1,33 +1,35 @@
 	//Define angular module
 	var app = angular.module('listApp',[])
 	
-	app.controller('ListCtrl', function($scope, $window){
+	app.controller('ListCtrl', function($http, $scope, $window){
 		
-	//If data array needs to be obtained, use below:
-	//////////////////////
-	/*
-	var data = $http.get("{path to JSON data}")
+	var data = $http.get("./videoList.txt")
         .then(function successCallback(response)
               {
-                data = response;
+                data = response.data;
+                var allTextLines = data.split(/\r\n|\n/);
+			    var headers = allTextLines[0].split(',');
+			    var lines = [];
+
+			    for ( var i = 0; i < allTextLines.length - 1; i++) {
+			        // split content based on comma
+			        var pdata = allTextLines[i].split(',');
+			        if (pdata.length == headers.length) {
+			            var tarr = [];
+			            for ( var j = 0; j < headers.length; j++) {
+			                tarr.push(pdata[j]);
+			            }
+			            lines.push(tarr);
+			        }
+			        
+			    }
+			    $scope.videoData = lines;
               }, function errorCallback(response)
               {
                  alert("Cannot read quote data")
              });
-	};
-	//////////////////////
-	*/
 	
-	//For demo purpose, local file has been hard-coded:
-	var data = [
-	{id: 0, fileName : "Tea Cup", link: "content/343647377.mp4"},	
-	{id: 1, fileName : "Earth Zoom", link: "content/Earth_Zoom_In.mov"},
-	{id: 2, fileName : "WRK Sign 1", link: "content/wrksign.m4v"},
-	{id: 3, fileName : "WRK Sign 2", link: "content/wrksign2.m4v"}
-	]
 	
-	//Place in $scope
-	$scope.videoData = data;
 	
 	//Passing the data in parameter
 	$scope.passData = function(video){
@@ -52,7 +54,7 @@
 	//Videogular controller with custom button
 		videogularApp.controller('PlayCtrl',
 		["$sce","$location", function ($sce, $location) {
-		var videoLink = $location.hash();
+		var videoLink = "content/" + ($location.hash());
 			this.config = {
 				preload: "none",
 				sources: [
@@ -74,7 +76,7 @@
 				},
 				plugins: {
 					controls: {
-						autoHide: false
+						autoHide: false,
 					}
 				}
 			};
@@ -88,6 +90,7 @@
                 template: "<div id='stopButton' class='iconButton' ng-click='API.stop()'>STOP</div>",
                 link: function(scope, elem, attrs, API) {
                     scope.API = API;
+                    setTimeout(function(){API.play()}, 1500);
                 }
 			}
 		}
