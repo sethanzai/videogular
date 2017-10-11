@@ -2,13 +2,16 @@
   <base href="/">
   <script src="script/angular.min.js"></script>
   <script src="script/main.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-
-<div ng-app="listApp" ng-controller="ListCtrl">
+<body>
+<div class="video-selector" ng-app="listApp" ng-controller="ListCtrl">
+	<h1>Select Video</h1>
 	<select ng-model="selectedVideo" ng-options="x for x in videoData">
 	</select>
 <button ng-click="passData(selectedVideo)">
-Submit
+Play
 </button>
 </div>
+</body>
